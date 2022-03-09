@@ -85,7 +85,7 @@ router.put('/:id/add-place', isAuthenticated, (req, res) => {
     const { id } = req.params
 
     User
-        .findByIdAndUpdate(myUserId, { $push: { favPlaces: id } }, { new: true })
+        .findByIdAndUpdate(myUserId, { $addToSet: { favPlaces: id } }, { new: true })
         .then(data => res.json(data.favPlaces))
         .catch(err => res.status(500).json(err))
 })
