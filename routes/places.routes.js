@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 })
 
 // Create a place
-router.post('/save-place', isAuthenticated, (req, res) => {
+router.post('/save-place', isAuthenticated, checkRole('OWNER', 'ADMIN'), (req, res) => {
 
     const { name, type, url, image, description, lat, lng } = req.body
     const owner = req.payload._id
