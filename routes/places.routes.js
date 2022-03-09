@@ -42,7 +42,7 @@ router.post('/save-place', isAuthenticated, (req, res) => {
 })
 
 // Update a place
-router.put('/:id/update-place', isAuthenticated, checkRole('OWNER', 'ADMIN'), (req, res) => {
+router.put('/:id/update-place', isAuthenticated, checkRole('ADMIN', 'OWNER'), (req, res) => {
 
     const { name, type, url, image, description, lat, lng } = req.body
     const { id } = req.params

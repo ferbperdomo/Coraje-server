@@ -8,5 +8,5 @@ const checkRole = (...admitedRoles) => (req, res, next) => {
 }
 
 module.exports = {
-    checkRole
+    checkRole,
 }

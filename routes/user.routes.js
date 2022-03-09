@@ -1,5 +1,5 @@
 const { isAuthenticated } = require('./../middlewares/jwt.middleware')
-const { checkRole } = require('./../middlewares/route-guard')
+const { checkRole, isSameUser } = require('./../middlewares/route-guard')
 const router = require('express').Router()
 const User = require("../models/User.model")
 
@@ -38,7 +38,7 @@ router.get('/:id', isAuthenticated, (req, res) => {
 })
 
 // Update info user
-router.put('/:id', isAuthenticated, checkRole('ADMIN'), (req, res) => {
+router.put('/:id', isAuthenticated, (req, res) => {
 
     const { id } = req.params
     const { username, email, profileImg, description } = req.body
@@ -103,7 +103,7 @@ router.put('/:id/remove-place', isAuthenticated, (req, res) => {
 })
 
 // Delete user
-router.delete('/:id/delete-user', isAuthenticated, (req, res) => {
+router.delete('/:id/delete-user', isAuthenticated, checkRole('ADMIN'), (req, res) => {
 
     const { id } = req.params
 
