@@ -9,11 +9,15 @@ router.post('/:place/create-review', isAuthenticated, (req, res) => {
 
     const { text, rating } = req.body
     const username = req.payload._id
+    console.log('USERNAME SE SUPONE', username)
     const { place } = req.params
 
     Review
         .create({ username, place, text, rating })
-        .then(review => res.json(review))
+        .then(review => {
+            console.log('ESTO ES LA PUÑETERA REVIEW', review)
+            res.json(review)
+        })
         .catch(err => res.status(500).json(err))
 })
 
@@ -24,6 +28,18 @@ router.get('/:place', (req, res) => {
 
     Review
         .find({ "place": place })
+        .populate('username')
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+// Get one review
+router.get('/:id', (req, res) => {
+
+    const { id } = req.params
+
+    Review
+        .findById(id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
