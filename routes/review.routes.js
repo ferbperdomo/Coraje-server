@@ -18,10 +18,12 @@ router.post('/:place/create-review', isAuthenticated, (req, res) => {
 })
 
 // Get reviews
-router.get('/', (req, res) => {
+router.get('/:place', (req, res) => {
+
+    const { place } = req.params
 
     Review
-        .find()
+        .find({ "place": place })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
