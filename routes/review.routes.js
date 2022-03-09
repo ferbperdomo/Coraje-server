@@ -44,19 +44,6 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Update review
-router.put('/:place/:id/update-review', isAuthenticated, (req, res) => {
-
-    const { text, rating, date } = req.body
-    const { id, place } = req.params
-    const username = req.payload._id
-
-    Review
-        .findByIdAndUpdate(id, { username, place, text, rating, date }, { new: true })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
-
 // Delete review
 router.delete('/:id/delete-review', isAuthenticated, (req, res) => {
 
