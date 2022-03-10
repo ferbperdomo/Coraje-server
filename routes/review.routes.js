@@ -3,8 +3,6 @@ const Review = require('./../models/Review.model')
 const { isAuthenticated } = require('./../middlewares/jwt.middleware')
 const { checkRole } = require('./../middlewares/route-guard')
 
-
-// Create review
 router.post('/:place/create-review', isAuthenticated, (req, res) => {
 
     const { text, rating } = req.body
@@ -21,7 +19,6 @@ router.post('/:place/create-review', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Get reviews
 router.get('/:place', (req, res) => {
 
     const { place } = req.params
@@ -33,7 +30,6 @@ router.get('/:place', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Get one review
 router.get('/:id', (req, res) => {
 
     const { id } = req.params
@@ -44,7 +40,6 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Delete review
 router.delete('/:id/delete-review', isAuthenticated, (req, res) => {
 
     const { id } = req.params
@@ -54,6 +49,5 @@ router.delete('/:id/delete-review', isAuthenticated, (req, res) => {
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
 
 module.exports = router

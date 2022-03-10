@@ -8,7 +8,13 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 })
 
-const storage = new CloudinaryStorage({ cloudinary })
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        allowed_formats: ['jpg', 'png'],
+        folder: 'coraje'
+    }
+})
 
 const uploadCloud = multer({ storage })
 

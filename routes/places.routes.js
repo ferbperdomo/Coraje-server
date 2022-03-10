@@ -4,7 +4,6 @@ const User = require('./../models/User.model')
 const { isAuthenticated } = require('./../middlewares/jwt.middleware')
 const { checkRole } = require('./../middlewares/route-guard')
 
-// Get all places
 router.get('/', (req, res) => {
 
     Place
@@ -14,7 +13,6 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Get single place
 router.get('/:id', (req, res) => {
 
     const { id } = req.params
@@ -25,7 +23,6 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Create a place
 router.post('/save-place', isAuthenticated, checkRole('OWNER', 'ADMIN'), (req, res) => {
 
     const { name, type, url, image, description, lat, lng } = req.body
@@ -41,7 +38,6 @@ router.post('/save-place', isAuthenticated, checkRole('OWNER', 'ADMIN'), (req, r
         .catch(err => res.status(500).json(err))
 })
 
-// Update a place
 router.put('/:id/update-place', isAuthenticated, checkRole('ADMIN', 'OWNER'), (req, res) => {
 
     const { name, type, url, image, description, lat, lng } = req.body
@@ -58,7 +54,6 @@ router.put('/:id/update-place', isAuthenticated, checkRole('ADMIN', 'OWNER'), (r
         .catch(err => res.status(500).json(err))
 })
 
-// Delete place
 router.delete('/:id/delete-place', isAuthenticated, checkRole('OWNER', 'ADMIN'), (req, res) => {
 
     const { id } = req.params
@@ -73,7 +68,5 @@ router.delete('/:id/delete-place', isAuthenticated, checkRole('OWNER', 'ADMIN'),
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
-
 
 module.exports = router

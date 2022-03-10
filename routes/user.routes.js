@@ -3,7 +3,6 @@ const { checkRole, isSameUser } = require('./../middlewares/route-guard')
 const router = require('express').Router()
 const User = require("../models/User.model")
 
-// Find all users
 router.get('/', isAuthenticated, (req, res) => {
 
     User
@@ -13,7 +12,6 @@ router.get('/', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Find users by filter
 router.get('/filtered-users/:usersearch', isAuthenticated, (req, res) => {
 
     const { usersearch } = req.params
@@ -25,7 +23,6 @@ router.get('/filtered-users/:usersearch', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Find one user
 router.get('/:id', isAuthenticated, (req, res) => {
     const { id } = req.params
 
@@ -37,7 +34,6 @@ router.get('/:id', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Update info user
 router.put('/:id', isAuthenticated, (req, res) => {
 
     const { id } = req.params
@@ -49,7 +45,6 @@ router.put('/:id', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Add friends 
 router.put('/:id/add-friend', isAuthenticated, (req, res) => {
 
     const myUserId = req.payload._id
@@ -64,7 +59,6 @@ router.put('/:id/add-friend', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// remove friends
 router.put('/:id/remove-friend', isAuthenticated, (req, res) => {
     const myUserId = req.payload._id
     const { id } = req.params
@@ -78,7 +72,6 @@ router.put('/:id/remove-friend', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// add fav-place
 router.put('/:id/add-place', isAuthenticated, (req, res) => {
 
     const myUserId = req.payload._id
@@ -90,7 +83,6 @@ router.put('/:id/add-place', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-//remove fav-place
 router.put('/:id/remove-place', isAuthenticated, (req, res) => {
 
     const myUserId = req.payload._id
@@ -102,7 +94,6 @@ router.put('/:id/remove-place', isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-// Delete user
 router.delete('/:id/delete-user', isAuthenticated, checkRole('ADMIN'), (req, res) => {
 
     const { id } = req.params
@@ -117,7 +108,6 @@ router.delete('/:id/delete-user', isAuthenticated, checkRole('ADMIN'), (req, res
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
-
 
 module.exports = router
 
