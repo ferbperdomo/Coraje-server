@@ -7,13 +7,11 @@ router.post('/:place/create-review', isAuthenticated, (req, res) => {
 
     const { text, rating } = req.body
     const username = req.payload._id
-    console.log('USERNAME SE SUPONE', username)
     const { place } = req.params
 
     Review
         .create({ username, place, text, rating })
         .then(review => {
-            console.log('ESTO ES LA PUÑETERA REVIEW', review)
             res.json(review)
         })
         .catch(err => res.status(500).json(err))
