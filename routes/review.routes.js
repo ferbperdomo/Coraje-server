@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const Review = require('./../models/Review.model')
 const { isAuthenticated } = require('./../middlewares/jwt.middleware')
-const { checkRole } = require('./../middlewares/route-guard')
 
 router.post('/:place/create-review', isAuthenticated, (req, res) => {
 
